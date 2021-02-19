@@ -9,7 +9,11 @@ router.post(
     body('hours')
         .not().isEmpty()
         .custom((value,{req, loc, path}) => {
-            return parseInt(value);
+            const hours = parseInt(value);
+            if(hours < 1 || hours > 20) {
+                throw new Error('Value must be between 1 and 20');
+            }
+            return hours;
         }),
     (req, res) => {
         const errors = validationResult(req);
