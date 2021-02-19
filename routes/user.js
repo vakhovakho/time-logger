@@ -1,5 +1,3 @@
-const { parse } = require('crypto-js/enc-base64');
-const e = require('express');
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();

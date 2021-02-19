@@ -37,6 +37,16 @@ const sess = {
  
 app.use(session(sess))
 
+app.use(function (req, res, next) {
+  if(req.session.user) {
+    app.locals.loggedIn = true;
+  } else {
+    app.locals.loggedIn = false;
+  }
+
+  next();
+})
+
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', usersRouter);

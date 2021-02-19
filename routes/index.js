@@ -1,8 +1,7 @@
 var express = require('express');
 var app = express();
+const homeCtrl = require('../controllers/home');
 
-app.get('/', (req, res) => {
-	res.send(req.session);
-});
+app.get('/', homeCtrl.index);
 
 module.exports = app;

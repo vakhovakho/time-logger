@@ -19,7 +19,24 @@
 </head>
 
 <body>
-  {{{body}}}
+  <header>
+    <nav>
+      <div class="nav-left">
+        <a href="/">Home</a>
+      </div>
+      <div class="nav-right">
+        {{#if loggedIn}}
+          <a href="/auth/logout">Log out</a>
+        {{else}}
+          <a href="/auth/register">Register</a>
+          <a href="/auth/login">Log in</a>
+        {{/if}}
+      </div>
+    </nav>
+  </header>
+  <main>
+    {{{body}}}
+  </main>
 </body>
 
 </html>

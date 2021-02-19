@@ -1,6 +1,19 @@
 body {
 	margin: 0;
-	padding: 100px;
+	padding: 10px 100px;
+}
+
+header nav{
+	display: flex;
+	justify-content: space-between;
+}
+
+header nav a {
+	margin-left: 20px;
+}
+
+main {
+	margin-top: 20px;
 }
 
 form {
@@ -21,6 +34,74 @@ form input[type="submit"] {
   	cursor: pointer;
 }
 
-h5 {
+h5, h6 {
 	text-align: center;
 }
+
+.tracks .track {
+	height: 50px;
+	position: relative;
+	margin: 10px 0;
+	/* border-radius: 5px;
+	overflow: hidden; */
+}
+
+.tracks .track div {
+	height: 50px;
+	position: absolute;
+	left: 0;
+}
+
+.tracks .track .bar:not(.no-anim) {
+	width: 0px;
+	border-radius: 0 5px 5px 0;;
+	transition: width 2s 0.5s ease-out;
+}
+
+.tracks .track .bar span {
+	color: white;
+	position: absolute;
+	right: 5px;
+	line-height: 50px;
+}
+
+.tracks .track .name {
+    top: 10px;
+	left: 0;
+    height: 30px;
+    padding: 0 5px;
+	margin-left: 5px;
+    border-radius: 5px;
+    border: 3px solid #606060;
+    background-color: #606060;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+	transition: left 2s 0.5s ease-out;
+}
+
+.gray {
+	background-color: #ffd0d0;
+}
+
+.blue {
+	background-color: #0563ff;
+}
+
+.red {
+	background-color: #ff5a5a;
+}
+
+@media (max-width: 600px) {
+	body {
+		margin: 0;
+		padding: 10px 30px;
+	}
+
+	.tracks .track .bar span {
+		font-size: 12px;
+		right: 2px;
+	}
+
+	
+}	

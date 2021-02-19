@@ -14,6 +14,8 @@ router.post(
     body('password')
         .not().isEmpty()
         .isLength({ min: 6 }),
+    body('name')
+        .not().isEmpty(),
         (req, res) => {
             // Finds the validation errors in this request and wraps them in an object with handy functions
             const errors = validationResult(req);
@@ -23,7 +25,7 @@ router.post(
             }
         
             userCtrl.login(req, res);
-        },
+        },    
 );
 
 router.get('/register', userCtrl.registration);
@@ -56,5 +58,7 @@ router.post(
 router.get('/registration-success', (req, res) => {
     res.render('registration_success');
 });
+
+router.get('/logout', userCtrl.logout);
 
 module.exports = router;

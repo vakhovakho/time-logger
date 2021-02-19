@@ -1,1 +1,12 @@
-<h1>MONGO</h1>
+<div class="tracks" data-max={{maxTotal}}>
+    {{#each users}}
+        <div class="track" data-length={{this.timeTotal}}>
+            <div class="gray bar no-anim" data-length="200"></div>
+            <div class="blue bar" data-length={{this.timeSpent}}><span>{{this.timeSpent}}h</span></div>
+            <div class="name" data-left={{this.timeSpent}}>{{this.name}}</div>
+            <div class="red bar" data-left="200" data-length={{this.penalty}}><span>+{{this.penalty}}h</span></div>
+        </div>
+    {{/each}}
+</div>
+
+<script src="/javascripts/home.js"></script>

@@ -38,17 +38,23 @@ exports.login = (req, res, next) => {
         let db = client.db('users_database');
         const hash = Base64.stringify(sha256(req.body.password));
         console.log(hash);
-        db.collection('users').findOne({password: hash})
+        db.collection('users').findOne({password: hash, name: req.body.name})
             .then(user => {
                 if(!user) {
                     res.redirect(`/auth/login?error=No such user`);
                     return; 
                 }
                 
-                req.session.user = user.id;
+                req.session.user = user;
                 res.redirect('/user/dashboard');
             });
     });
+}
+
+
+exports.logout = (req, res, next) => {
+    req.session.destroy();
+    res.redirect('/'); 
 }
 
 exports.dashboard = (req, res) => {
@@ -56,7 +62,7 @@ exports.dashboard = (req, res) => {
         res.redirect('/auth/login');
     }
 
-    res.render('dashboard');
+    res.render('dashboard', {user: req.session.user});
 }
 
 exports.saveHours = (req, res, next) => {
@@ -68,31 +74,58 @@ exports.saveHours = (req, res, next) => {
 
         let db = client.db('users_database');
 
-        db.collection('users').findOne({id: req.session.user})
+        db.collection('users').findOne({id: req.session.user.id})
             .then(user => {
                 if(!user) {
                     res.redirect(`/auth/login?error=No such user`);
                     return; 
                 }
+
+                const dayInMiliseconds = 1000 * 3600 * 24;
+                const hours = parseInt(req.body.hours);
+                user.lastRecord = new Date(user.lastRecord).getTime();
                 
-                if(Date.now() - new Date(user.lastRecord).getTime() < (1000 * 3600 * 24)) {
-                    res.redirect('/user/dashboard?error=You can only do it once per 24 hour');
+                if(Date.now() - new Date(user.lastRecord).getTime() < dayInMiliseconds / 2) {
+                    res.redirect('/user/dashboard?error=You can only do it once per 12 hour');
                     return;
                 }
+
                 
-                db.collection('users').updateOne(
+                if(hours === 1) {
+                    user.timeTotal += 2;
+                }
+
+                // 2 to the power of days without logged time
+                const daysMissed =  Math.floor((Date.now() - user.lastRecord) / dayInMiliseconds) - 1;
+                if(daysMissed > 0) {
+                    user.timeTotal += (1 +daysMissed) * daysMissed;
+                }
+                
+                
+                const updateUserPromise = db.collection('users').updateOne(
                     {id: user.id},
                     { $set: {
-                            "timeSpent": user.timeSpent + parseInt(req.body.hours),
-                            "lastRecord": new Date()
+                            "timeSpent": user.timeSpent + hours,
+                            "lastRecord": new Date(),
+                            "timeTotal": user.timeTotal
                         } 
                     }
-                ).then(() => {
-                    res.redirect('/user/dashboard');
-                }).catch(e => {
-                    res.redirect('/user/dashboard?error=' + e.message);
-                })
-                
+                );
+
+      
+                const addLogPromise = db.collection('logs').updateOne(
+                    { userId: user.id },
+                    { $push: { logs: {time: new Date(), hours: hours} } },
+                    { upsert: true }
+                )
+
+                Promise.all([updateUserPromise, addLogPromise])
+                    .then(() => {
+                        res.redirect('/');
+                    })
+                    .catch(e => {
+                        res.redirect('/user/dashboard?error=' + e.message);
+                    })
                 
             });
     });
