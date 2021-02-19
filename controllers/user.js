@@ -62,7 +62,7 @@ exports.dashboard = (req, res) => {
         res.redirect('/auth/login');
     }
 
-    res.render('dashboard', {user: req.session.user});
+    res.render('dashboard', {user: req.session.user.name, title: 'Dashboard'});
 }
 
 exports.saveHours = (req, res, next) => {

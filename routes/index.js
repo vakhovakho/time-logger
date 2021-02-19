@@ -1,7 +1,7 @@
 var express = require('express');
-var app = express();
+const router = express.Router();
 const homeCtrl = require('../controllers/home');
 
-app.get('/', homeCtrl.index);
+router.get('/', homeCtrl.index);
 
-module.exports = app;
+module.exports = router;

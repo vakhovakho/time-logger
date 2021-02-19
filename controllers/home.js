@@ -18,7 +18,11 @@ exports.index = (req, res, next) => {
                     .sort((a, b) => (b.timeSpent - b.penalty) - (a.timeSpent - a.penalty) );
                 
                 const maxTotal = findMaxTotal(users);
-                res.render('index', {users: users, maxTotal: maxTotal});  
+                res.render('index', {
+                    users: users, 
+                    maxTotal: maxTotal, 
+                    title: "Home Page"
+                });  
             });
     });
 }

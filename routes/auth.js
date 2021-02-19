@@ -6,7 +6,7 @@ const userCtrl = require('../controllers/user');
 
 // router.post('/login', userCtrl.login);
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', {title: 'Log in'});
 });
 
 router.post(
@@ -56,7 +56,7 @@ router.post(
     },
 );
 router.get('/registration-success', (req, res) => {
-    res.render('registration_success');
+    res.render('registration_success', {title: "Success!"});
 });
 
 router.get('/logout', userCtrl.logout);
