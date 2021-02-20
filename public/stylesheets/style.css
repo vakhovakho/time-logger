@@ -3,6 +3,10 @@ body {
 	padding: 10px 100px;
 }
 
+* {
+	user-select: none;
+}
+
 header nav{
 	display: flex;
 	justify-content: space-between;
