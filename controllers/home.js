@@ -4,7 +4,7 @@ const { mongoUrl } = require('../config');
 exports.index = (req, res, next) => {
     MongoClient.connect(mongoUrl, { useUnifiedTopology: true }, function(err, client){
 		if(err) {
-            res.redirect(`/user/dashboard?error=${err}`) 
+            res.render('error', {error: err})
             return;
         }
 
