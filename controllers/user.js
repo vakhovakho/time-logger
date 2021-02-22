@@ -96,7 +96,7 @@ exports.saveHours = (req, res, next) => {
                 }
 
                 // 2 to the power of days without logged time
-                const daysMissed =  Math.floor((Date.now() - user.lastRecord) / dayInMiliseconds) - 1;
+                const daysMissed =  Math.floor((Date.now() - user.lastRecord) / dayInMiliseconds);
                 if(daysMissed > 0) {
                     user.timeTotal += (1 +daysMissed) * daysMissed;
                 }

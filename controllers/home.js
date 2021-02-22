@@ -14,7 +14,16 @@ exports.index = (req, res, next) => {
             .find({})
             .toArray(function (err, users) {
                 users = users
-                    .map(user => ({...user, penalty: user.timeTotal - 200}))
+                    .map(user => {
+                        const dayInMiliseconds = 1000 * 3600 * 24;
+                        user.lastRecord = new Date(user.lastRecord).getTime();
+                        
+                        const daysMissed =  Math.floor((Date.now() - user.lastRecord) / dayInMiliseconds);
+                        if(daysMissed > 0) {
+                            user.timeTotal += (1 +daysMissed) * daysMissed;
+                        }
+                        return {...user, penalty: user.timeTotal - 200};
+                    })
                     .sort((a, b) => (b.timeSpent - b.penalty) - (a.timeSpent - a.penalty) );
                 
                 const maxTotal = findMaxTotal(users);
