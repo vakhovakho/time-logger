@@ -4,7 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session')
+const MongoStore = require('connect-mongo').default;
 const {v4 : uuidv4} = require('uuid')
+const { mongoUrl } = require('./config');
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
@@ -30,6 +32,7 @@ const sess = {
   },
   resave: false,
   saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl:mongoUrl }),
   genid: function(req) {
     return uuidv4() // use UUIDs for session IDs
   }
