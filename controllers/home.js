@@ -18,7 +18,7 @@ exports.index = (req, res, next) => {
                         const dayInMiliseconds = 1000 * 3600 * 24;
                         user.lastRecord = new Date(user.lastRecord).getTime();
                         
-                        const daysMissed =  Math.floor((Date.now() - user.lastRecord) / dayInMiliseconds);
+                        const daysMissed =  Math.floor((Date.now() - user.lastRecord) / dayInMiliseconds - 0.25);
                         if(daysMissed > 0) {
                             user.timeTotal += (1 +daysMissed) * daysMissed;
                         }
