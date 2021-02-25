@@ -27,9 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const sess = {
   secret: 'keyboard cat',
-  cookie: {
-      expires: new Date(Date.now() + (1000 * 3600 * 24)),
-  },
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl:mongoUrl }),
