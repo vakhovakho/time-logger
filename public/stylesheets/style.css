@@ -56,6 +56,10 @@ h5, h6 {
 	left: 0;
 }
 
+.tracks .track .bar.blue {
+	z-index: 1;
+}
+
 .tracks .track .bar:not(.no-anim) {
 	width: 0px;
 	border-radius: 0 5px 5px 0;;
