@@ -45,7 +45,12 @@ window.onload = function() {
     });
     
     names.forEach(name => {
-        name.style.left = `${ratio * parseInt(name.dataset.left)}px`
+        let left = parseInt(name.dataset.left);
+        if(left > 150) {
+            name.style.left = '5px';
+        } else {
+            name.style.left = `${ratio * left}px`;
+        }
     });
 
     times.forEach((time, i) => {
