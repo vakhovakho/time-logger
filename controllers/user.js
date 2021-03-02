@@ -105,7 +105,7 @@ exports.saveHours = (req, res, next) => {
                 const updateUserPromise = db.collection('users').updateOne(
                     {id: user.id},
                     { $set: {
-                            "timeSpent": user.timeSpent + hours,
+                            "timeSpent": (user.timeSpent + hours) > 200 ? 200 : (user.timeSpent + hours),
                             "lastRecord": new Date(),
                             "timeTotal": user.timeTotal
                         } 
