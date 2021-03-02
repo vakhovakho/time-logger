@@ -3,7 +3,7 @@ const tracks = tracksElement.querySelectorAll('.track');
 const bars = tracksElement.querySelectorAll('.bar');
 const names = tracksElement.querySelectorAll('.name');
 const times = tracksElement.querySelectorAll('.time');
-const maxTotal = tracksElement.dataset.max;
+const maxTotal = 200;
 const maxWidth =  window.innerWidth - (window.innerWidth > 600 ? 200 : 60);
 const ratio = Math.floor(maxWidth / maxTotal * 10) / 10;
 
