@@ -46,6 +46,7 @@ h5, h6 {
 	height: 50px;
 	position: relative;
 	margin: 10px 0;
+	/* cursor: pointer; */
 	/* border-radius: 5px;
 	overflow: hidden; */
 }
@@ -71,6 +72,7 @@ h5, h6 {
 	position: absolute;
 	right: 5px;
 	line-height: 50px;
+	opacity: 0;
 }
 
 .tracks .track .name {
@@ -98,7 +100,41 @@ h5, h6 {
 
 .red {
 	background-color: #ff5a5a;
+	left: auto !important;
+	right: 0;
+	z-index: 2;
+	transition: width 2.5s 2.5s ease-out !important;
 }
+
+.tracks .track .details {
+	position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    background-color: white;
+    padding: 10px;
+    height: auto;
+    box-shadow: 0 0 1px #333;
+    width: 180px;
+    border-radius: 10px;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	visibility: hidden;
+}
+
+.track .details.show {
+	visibility: visible;
+}
+
+.tracks .track .details p {
+	margin: 0;
+}
+
+.tracks .track .details p span{
+	font-weight: bold;
+}
+
 
 @media (max-width: 600px) {
 	body {
@@ -108,7 +144,7 @@ h5, h6 {
 
 	.tracks .track .bar span {
 		font-size: 12px;
-		right: 2px;
+		/* right: 2px; */
 	}
 
 	

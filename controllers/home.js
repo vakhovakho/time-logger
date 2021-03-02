@@ -22,7 +22,7 @@ exports.index = (req, res, next) => {
                         if(daysMissed > 0) {
                             user.timeTotal += (1 +daysMissed) * daysMissed;
                         }
-                        return {...user, penalty: user.timeTotal - 200};
+                        return {...user, penalty: user.timeTotal - 200, finalTime: user.timeSpent - (user.timeTotal - 200), timeLeft: user.timeTotal - user.timeSpent + user.timeTotal - 200};
                     })
                     .sort((a, b) => (b.timeSpent - b.penalty) - (a.timeSpent - a.penalty) );
                 

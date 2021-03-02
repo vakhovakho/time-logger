@@ -2,9 +2,17 @@
     {{#each users}}
         <div class="track" data-length={{this.timeTotal}}>
             <div class="gray bar no-anim" data-length="200"></div>
-            <div class="blue bar" data-length={{this.timeSpent}}><span>{{this.timeSpent}}h</span></div>
+            <div class="blue bar" data-length={{this.timeSpent}}>
+                <span class="time" data-right="{{this.penalty}}"> {{this.finalTime}}h</span>
+                <div class="red bar" data-length={{this.penalty}}></div>
+            </div>
             <div class="name" data-left={{this.timeSpent}}>{{this.name}}</div>
-            <div class="red bar" data-left="200" data-length={{this.penalty}}><span>+{{this.penalty}}h</span></div>
+            <div class="details">
+                <p>Goal: <span>200h</span></p>
+                <p>Logged: <span style="color: #0563ff">{{this.timeSpent}}h</span></p>
+                <p>Penalty: <span style="color: #ff5a5a">{{this.penalty}}h</span></p>
+                <p>Left: <span style="color: #73d436;">{{this.timeLeft}}h</span></p>
+            </div>
         </div>
     {{/each}}
 </div>
