@@ -20,6 +20,8 @@ exports.register = (req, res, next) => {
 
         let db = client.db('users_database');
         db.collection('users').insertOne(user);
+
+        client.close();
         
         res.redirect('/auth/registration-success');
     });
@@ -31,6 +33,7 @@ exports.login = (req, res, next) => {
 
     MongoClient.connect(mongoUrl, { useUnifiedTopology: true }, function(err, client){
 		if(err) {
+            client.close();
             res.redirect(`/auth/login?error=${err}`) 
             return;
         }
@@ -41,11 +44,13 @@ exports.login = (req, res, next) => {
         db.collection('users').findOne({password: hash, name: req.body.name})
             .then(user => {
                 if(!user) {
+                    client.close();
                     res.redirect(`/auth/login?error=No such user`);
                     return; 
                 }
                 
                 req.session.user = user;
+                client.close();
                 res.redirect('/user/dashboard');
             });
     });
@@ -77,6 +82,7 @@ exports.saveHours = (req, res, next) => {
         db.collection('users').findOne({id: req.session.user.id})
             .then(user => {
                 if(!user) {
+                    client.close();
                     res.redirect(`/auth/login?error=No such user`);
                     return; 
                 }
@@ -121,9 +127,11 @@ exports.saveHours = (req, res, next) => {
 
                 Promise.all([updateUserPromise, addLogPromise])
                     .then(() => {
+                        client.close();
                         res.redirect('/');
                     })
                     .catch(e => {
+                        client.close();
                         res.redirect('/user/dashboard?error=' + e.message);
                     })
                 

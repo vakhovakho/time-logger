@@ -27,6 +27,7 @@ exports.index = (req, res, next) => {
                     .sort((a, b) => (b.timeSpent - b.penalty) - (a.timeSpent - a.penalty) );
                 
                 const maxTotal = findMaxTotal(users);
+                client.close();
                 res.render('index', {
                     users: users, 
                     maxTotal: maxTotal, 
