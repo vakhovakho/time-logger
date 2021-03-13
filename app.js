@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session')
-const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo').default;
 const {v4 : uuidv4} = require('uuid')
 const { mongoUrl } = require('./config');
 
