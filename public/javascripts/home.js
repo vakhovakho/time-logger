@@ -62,6 +62,11 @@ window.onload = function() {
                 alpha += 0.1;
                 if(alpha > 1) {
                     clearInterval(interval);
+                    if(time.parentElement.dataset.length - time.dataset.right >= 200) {
+                        setTimeout(() => {
+                            time.parentElement.nextElementSibling.classList.add("completed");
+                        }, 2000)
+                    }
                 }
             }, 50);
         }, 3000 + (i * 300));
