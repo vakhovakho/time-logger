@@ -3,8 +3,8 @@ const tracks = tracksElement.querySelectorAll('.track');
 const bars = tracksElement.querySelectorAll('.bar');
 const names = tracksElement.querySelectorAll('.name');
 const times = tracksElement.querySelectorAll('.time');
-const maxTotal = 200;
-const maxWidth =  window.innerWidth - (window.innerWidth > 600 ? 200 : 60);
+const maxTotal = parseInt(tracksElement.dataset.max);
+const maxWidth =  window.innerWidth - (window.innerWidth > 600 ? maxTotal : 60);
 const ratio = Math.floor(maxWidth / maxTotal * 10) / 10;
 
 window.onload = function() {
@@ -34,10 +34,10 @@ window.onload = function() {
     
     
     bars.forEach(bar => {
-        if(bar.classList.contains('blue') && parseInt(bar.dataset.length) - parseInt(bar.children[1].dataset.length) >= 200) {
-            bar.dataset.length = 200;
-            bar.children[1].dataset.length = 0;
-        }
+        // if(bar.classList.contains('blue') && parseInt(bar.dataset.length) - parseInt(bar.children[1].dataset.length) >= 200) {
+        //     bar.dataset.length = 200;
+        //     bar.children[1].dataset.length = 0;
+        // }
         bar.style.width = `${ratio * parseInt(bar.dataset.length)}px`;
         if(bar.dataset.left) {
             bar.style.left = `${ratio * parseInt(bar.dataset.left)}px`;

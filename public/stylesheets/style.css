@@ -46,9 +46,8 @@ h5, h6 {
 	height: 50px;
 	position: relative;
 	margin: 10px 0;
-	/* cursor: pointer; */
-	/* border-radius: 5px;
-	overflow: hidden; */
+	left: 50%;
+    transform: translateX(-50%);
 }
 
 .tracks .track div {
