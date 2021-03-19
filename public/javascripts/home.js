@@ -34,6 +34,10 @@ window.onload = function() {
     
     
     bars.forEach(bar => {
+        if(bar.classList.contains('blue') && parseInt(bar.dataset.length) - parseInt(bar.children[1].dataset.length) >= 200) {
+            bar.dataset.length = 200;
+            bar.children[1].dataset.length = 0;
+        }
         bar.style.width = `${ratio * parseInt(bar.dataset.length)}px`;
         if(bar.dataset.left) {
             bar.style.left = `${ratio * parseInt(bar.dataset.left)}px`;
