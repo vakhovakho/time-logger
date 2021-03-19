@@ -42,12 +42,18 @@ h5, h6 {
 	text-align: center;
 }
 
+/* .tracks {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+} */
+
 .tracks .track {
 	height: 50px;
 	position: relative;
 	margin: 10px 0;
-	left: 50%;
-    transform: translateX(-50%);
+	/* left: 50%;
+    transform: translateX(-50%); */
 }
 
 .tracks .track div {
@@ -129,6 +135,7 @@ h5, h6 {
 	justify-content: space-around;
 	flex-direction: column;
 	visibility: hidden;
+	transform:translate(0, 0)
 }
 
 .track .details.show {

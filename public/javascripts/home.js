@@ -4,7 +4,7 @@ const bars = tracksElement.querySelectorAll('.bar');
 const names = tracksElement.querySelectorAll('.name');
 const times = tracksElement.querySelectorAll('.time');
 const maxTotal = parseInt(tracksElement.dataset.max);
-const maxWidth =  window.innerWidth - (window.innerWidth > 600 ? maxTotal : 60);
+const maxWidth =  window.innerWidth - (window.innerWidth > 600 ? 200 : 60);
 const ratio = Math.floor(maxWidth / maxTotal * 10) / 10;
 
 window.onload = function() {
