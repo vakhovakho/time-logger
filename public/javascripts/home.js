@@ -69,6 +69,7 @@ window.onload = function() {
                     if(time.parentElement.dataset.length - time.dataset.right >= 200) {
                         setTimeout(() => {
                             time.parentElement.nextElementSibling.classList.add("completed");
+                            time.parentElement.style.backgroundColor = "#35ad31";
                         }, 2000)
                     }
                 }
