@@ -12,6 +12,7 @@ exports.index = (req, res, next) => {
 
         db.collection('users')
             .find({})
+            .sort( { lastRecord: 1 } )
             .toArray(function (err, users) {
                 users = users
                     .map(user => {
