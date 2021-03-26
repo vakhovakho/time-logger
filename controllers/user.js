@@ -92,6 +92,7 @@ exports.saveHours = (req, res, next) => {
                 user.lastRecord = new Date(user.lastRecord).getTime();
                 
                 if(Date.now() - new Date(user.lastRecord).getTime() < dayInMiliseconds / 2) {
+                    client.close();
                     res.redirect('/user/dashboard?error=You can only do it once per 12 hour');
                     return;
                 }
